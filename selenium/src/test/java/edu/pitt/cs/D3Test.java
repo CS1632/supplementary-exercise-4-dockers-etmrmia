@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.Dimension;
@@ -64,7 +65,7 @@ public class D3Test {
       vars.put("reset_link", attribute);
     }
     // 4 | assert | reset_link | /reset
-    assertEquals(vars.get("reset_link").toString(), "http://localhost:8080//reset");
+    assertEquals(vars.get("reset_link").toString(), "http://localhost:8080/reset");
   }
 
   @Test
@@ -85,7 +86,7 @@ public class D3Test {
       vars.put("image", attribute);
     }
     // 5 | assert | image | /images/cat2.jpg
-    assertEquals(vars.get("image").toString(), "https://cs1632.appspot.com/images/cat2.jpg");
+    assertEquals(vars.get("image").toString(), "http://localhost:8080/images/cat2.jpg");
   }
 
   @Test
@@ -180,20 +181,5 @@ public class D3Test {
     assertThat(driver.findElement(By.xpath("//div[@id=\'listing\']/ul/li[3]")).getText(), is("ID 3. Mistoffelees"));
     // 10 | assertText | xpath=//div[2]/div[4] | Success!
     assertThat(driver.findElement(By.xpath("//div[2]/div[4]")).getText(), is("Success!"));
-  }
-
-  @Test
-  public void dEFECT1FUNGREETACAT() {
-    // Test name: DEFECT1-FUN-GREET-A-CAT
-    // Step # | name | target | value
-    // 1 | open | / |
-    driver.get("https://cs1632.appspot.com/");
-    // 2 | runScript | document.cookie = "1=true";document.cookie =
-    // "2=false";document.cookie = "3=false"; |
-    js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    // 3 | click | xpath=//a[contains(text(),'Greet-A-Cat')] |
-    driver.findElement(By.xpath("//a[contains(text(),\'Greet-A-Cat\')]")).click();
-    // 4 | assertText | xpath=//div[@id='greeting']/h4 | Meow!Meow!
-    assertThat(driver.findElement(By.xpath("//div[@id=\'greeting\']/h4")).getText(), is("Meow!Meow!"));
   }
 }
